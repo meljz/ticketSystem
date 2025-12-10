@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { LogoutComponent } from '../../auth/logout/logout.component';
 
 @Component({
   selector: 'app-primary-button',

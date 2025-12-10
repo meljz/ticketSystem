@@ -28,25 +28,42 @@ class AuthController extends Controller
     //returns JSON response
     return response()->json([
         'message'=> 'user register successfully',
-        'user' => '$user'
+        'users' => $user
     ], 201);
-}
+    }
 
     public function login (Request $request){
-        $this->validate ($request, [
+        
+        //validate natin
+        $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required'
+
         ]);
 
+        //query sa db ng email
         $user = User::where('email', $request->input('email'))->first();
 
+        //checking if true then fire
+        if ($user && Hash::check($request->input('password'), $user->password)){
 
-        if ($user && Hash::check($request->input('password'), $user->password)) {
-            return response()->json(['message' => 'Login successful', 'user' => $user]);
+             // Save user ID in session
+            $request->session()->put('user_id', $user->id);
+
+            return response()->json([
+                'message' => 'login successful',
+                'user' => $user,
+                'token' => session()->getId() // session ID
+            ], 200);
         }
+        return response()->json([
+            'messaage' => 'invalid credentials'
+        ], 401);   
+     }  
 
-        return response()->json(['message' => 'Invalid credentials'], 401);
-    }
+    public function logout(Request $request) {
+        $request->session()->invalidate();
+        return response()->json(['message' => 'Logged out']);
+}
 
-
-    }
+}

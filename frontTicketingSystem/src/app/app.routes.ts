@@ -13,15 +13,6 @@ export const routes: Routes = [
     },
 
     {
-        path: 'todos', 
-        loadComponent: () => {
-            return import("./todos/todos.component").then(
-                m => m.TodosComponent
-            );
-        },
-    },
-
-    {
         path: 'login', 
         loadComponent: () => {
             return import("./auth/login/login.component").then(
@@ -35,6 +26,14 @@ export const routes: Routes = [
         loadComponent: () => {
             return import("./auth/register/register.component").then(
                 m => m.RegisterComponent
+            );
+        },
+    },
+    {
+        path: 'logout', 
+        loadComponent: () => {
+            return import("./auth/logout/logout.component").then(
+                m => m.LogoutComponent
             );
         },
     },

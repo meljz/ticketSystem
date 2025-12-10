@@ -16,11 +16,21 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService) {}
 
+  //this receive the json in the backend that was sent
   register() {
-    this.authService.register({ name: this.name, email: this.email, password: this.password })
-      .subscribe({
-        next: res => console.log('Registered:', res),
-        error: err => console.error('Error:', err)
-      });
-  }
+  this.authService.register({ name: this.name, email: this.email, password: this.password })
+    .subscribe({
+      next: res => {
+        console.log('Registered:', res);
+        // clear inputs if you want
+        this.name = '';
+        this.email = '';
+        this.password = '';
+      },
+      error: err => console.error('Error:', err)
+    });
+
+    alert('register success');
+}
+
 }

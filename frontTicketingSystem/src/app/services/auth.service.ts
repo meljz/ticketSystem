@@ -17,4 +17,8 @@ export class AuthService {
   login(data: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
+
+   logout() {
+    return this.http.post(`${this.apiUrl}/logout`, {}); // call Lumen logout
+  }
 }

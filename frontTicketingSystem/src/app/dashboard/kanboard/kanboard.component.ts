@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
-import { TodosComponent } from '../../todos/todos.component';
 import { Router, RouterLink } from '@angular/router';
 import { IssueComponent } from "../../issue/issue.component";
 
 @Component({
   selector: 'app-kanboard',
-  imports: [RouterLink, SidebarComponent, TodosComponent, IssueComponent],
+  imports: [RouterLink, SidebarComponent, IssueComponent],
   templateUrl: './kanboard.component.html',
   styleUrl: './kanboard.component.css'
 })
