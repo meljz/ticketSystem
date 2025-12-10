@@ -10,15 +10,11 @@ import { TodosService } from './services/todos.service';
   imports: [RouterOutlet, HeaderComponent, /*HomeComponent*/],
   template: `
 
-  
-  <app-header></app-header>
-
-
-    <router-outlet></router-outlet>
-    <!--<app-home></app-home>-->
-
-
- 
+    <app-header></app-header>
+    <main class="flex-1 ml-64 p-6 bg-gray-100 min-h-screen">
+      <router-outlet></router-outlet>
+    </main>
+      <!--<app-home></app-home>-->
   `,
   styleUrl: './app.component.css'
 })
