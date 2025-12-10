@@ -23,14 +23,31 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
+$app->withEloquent();
+//$app->loadEnvironmentFrom('.env');
 
-// $app->withEloquent();
+
+$app->register(App\Providers\AuthServiceProvider::class);
+
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    Fruitcake\Cors\HandleCors::class,
+]);
+
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class,
+]);
+
+
+
 
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
 |--------------------------------------------------------------------------
+
+
 |
 | Now we will register a few bindings in the service container. We will
 | register the exception handler and the console kernel. You may add

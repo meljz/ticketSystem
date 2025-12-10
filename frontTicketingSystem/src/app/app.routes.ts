@@ -6,7 +6,7 @@ export const routes: Routes = [
         path: '', 
         pathMatch: 'full',
         loadComponent: () => {
-            return import("./home/home.component").then(
+            return import("./dashboard/home/home.component").then(
                 m => m.HomeComponent
             );
         },
@@ -42,9 +42,19 @@ export const routes: Routes = [
     {
         path: 'home',
         loadComponent: () => {
-            return import ("./home/home.component").then (
+            return import ("./dashboard/home/home.component").then (
                 m => m.HomeComponent
             );
         },
     },
+
+    {
+        path: 'kanboard',
+        loadComponent: () => {
+            return import ("./dashboard/kanboard/kanboard.component").then (
+                m => m.KanboardComponent
+            );
+        },
+    },
+
 ];

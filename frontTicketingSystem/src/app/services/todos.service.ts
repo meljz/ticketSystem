@@ -15,22 +15,6 @@ export class TodosService {
     title: 'Meljohn',
     id: 0,
   }, 
-  {
-    userId: 1,
-    completed: false,
-    title: 'Jay',
-    id: 1,
-  },
-  {
-    userId: 1,
-    completed: false,
-    title: 'Luna',
-    id: 2,
-  },
 ];
   constructor() { }
-  getTodosFromAPI(){
-    const url = 'https://jsonplaceholder.typicode.com/todos/';
-    return this.http.get<Array<Todo>>(url);
-  }
 }

@@ -6,53 +6,58 @@
     </h2>
 
     <!-- Form -->
-    <form>
-        <!--Name-->
-        <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-medium mb-2" for="name">
-          Name
-        </label>
+    <form (ngSubmit)="register()">
+      <!-- Name -->
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 text-sm font-medium mb-2">Name</label>
         <input
-          type="name"
+          type="text"
           id="name"
-          placeholder="Enter your Usename"
+          [(ngModel)]="name"
+          name="name"
+          placeholder="Enter your Username"
           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400"
+          required
         />
       </div>
+
       <!-- Email -->
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-medium mb-2" for="email">
-          Email
-        </label>
+        <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
         <input
           type="email"
           id="email"
+          [(ngModel)]="email"
+          name="email"
           placeholder="Enter your email"
           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400"
+          required
         />
       </div>
 
       <!-- Password -->
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-medium mb-2" for="password">
-          Password
-        </label>
+        <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
         <input
           type="password"
           id="password"
+          [(ngModel)]="password"
+          name="password"
           placeholder="Enter your password"
           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400"
+          required
         />
       </div>
 
-      <!-- Submit Button -->
+      <!-- Submit -->
       <button
         type="submit"
         class="w-full bg-violet-500 text-white py-2 rounded-lg hover:bg-violet-600 transition-colors"
       >
         Register
       </button>
-    </form>
+  </form>
+
 
     <!-- register -->
     <p class="text-sm text-center text-gray-600 mt-6">
