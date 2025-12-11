@@ -1,94 +1,74 @@
+<div class="flex flex-col items-center w-full max-w-md mx-auto space-y-4 p-4">
+  <!-- Main Issue List Card -->
+  <div class="bg-white rounded-xl shadow-lg text-center w-full p-4">
+    <h2 class="text-xl font-bold mb-4">ISSUE LIST</h2>
 
-<div class="bg-white rounded-xl shadow-lg text-center w-full max-w-md p-4 my-4 mx-auto">
-    <h2>ISSUE LIST</h2>
-
-    <!--this will only show when showInput() is true-->
+    <!-- Create Issue Form -->
     @if (showInput) {
-        <form class="w-75 mt-4 p-4 rounded-lg justify-center">
-            <textarea [(ngModel)]="newIssueTitle"
-                placeholder="Enter your issue"
-                class="border p-2 rounded w-full h-25 mb-2">s
-            </textarea>
+      <form class="mt-4 p-2 bg-gray-50 rounded-lg">
+        <textarea [(ngModel)]="newIssueTitle"
+                  name="issueTitle"
+                  placeholder="Enter your issue"
+                  class="border p-2 rounded w-full h-24 mb-2">
+        </textarea>
 
+        <button type="button"
+                (click)="submitNewIssue()"
+                class="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Confirm
+        </button>
+      </form>
+    }
 
-            <button (click)="saveIssue()"
-                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Save Issue
-            </button>
-        </form>
-        
-        
-            <li class="flex items-center justify-center gap-2 cursor-pointer bg-green-200 p-2 m-2 rounded">
-                <span class="text-purple-600">👤</span> Assign 
-            </li>
-
-        }
-    
-        @if (moveInput) {
-            <h2>Moving to...</h2>
-                <!--<div class="mt-4 p-4 bg-gray-100 rounded-lg flex flex-col">
-                <label >
-                    <input [(ngModel)]="issueStatus"
-                        type="radio"
-                        placeholder="Enter new status (todo, in-progress, done)"
-                        class="border p-2 rounded w-full mb-2"/>
-                    <span>To do</span>
-                </label>
-
-                <label>
-                    <input [(ngModel)]="issueStatus"
-                        type="radio"
-                        placeholder="Enter new status (todo, in-progress, done)"
-                        class="border p-2 rounded w-full mb-2" />
-                        <span>In Progress</span>
-                </label>
-
-                <label >
-                    <input [(ngModel)]="issueStatus"
-                        type="radio"
-                        placeholder="Enter new status (todo, in-progress, done)"
-                        class="border p-2 rounded w-full mb-2" />
-                        <span>Done</span>
-                </label>
-            -->
-            <div class="mt-4 p-4 bg-gray-100 rounded-lg flex items-center gap-4 justify-center">  
-                <select [(ngModel)]="issueStatus" class="border p-2 rounded">
-                <option value="" disabled selected>Select status</option>
-                <option value="todo">Todo</option>
-                <option value="in-progress">In Progress</option>
-                <option value="done">Done</option>
-                </select>
-            </div>
-            <button (click)="saveIssue()" class="p-1 bg-blue-600 text-white rounded hover:bg-blue-700">all goods</button>
-        }
-
-        
-
-    <ul class="flex flex-row space-y-3 text-gray-700 p-2 gap-5 justify-center">
-        <li class="flex items-center justify-center gap-2 cursor-pointer" (click)="createIssue()">
-        <span class="text-blue-600">➕</span> Create     
-        </li>   
-
-        <li class="flex items-center justify-center gap-2 cursor-pointer" (click)="moveIssue()">
-            <span class="text-orange-600">➡️</span> Move 
-        </li>
-        
-
-
-        <li class="flex items-center justify-center gap-2 cursor-pointer">
-            <span class="text-green-600">📋</span> List 
-        </li>
+    <!-- Action Buttons -->
+    <ul class="flex flex-row gap-5 justify-center mt-6 pt-4 border-t">
+      <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
+          (click)="createIssue()">
+        <span class="text-blue-600">➕</span> Create
+      </li>
     </ul>
-    
+  </div>
+
+  <!-- Individual Issue Cards -->
+  @for (issue of filteredIssues; track issue.id) {
+    <div class="bg-white text-black p-4 rounded-xl shadow-lg w-full text-left">
+      {{ issue.title }}
+
+      <!-- Move Issue Options -->
+      @if (moveInput && selectedIssueId === issue.id) {
+        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+          <h3 class="text-lg font-semibold mb-2">Moving to...</h3>
+          <select [(ngModel)]="issueStatus"
+                  name="issueStatus"
+                  class="border p-2 rounded w-full mb-2">
+            <option value="">Select status</option>
+            <option value="todo">Todo</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+          <button (click)="confirmMoveIssue()"
+                  class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Confirm
+          </button>
+        </div>
+      }
+
+      <!-- Action Buttons -->
+      <ul class="flex flex-row gap-5 justify-center mt-6 pt-4 border-t">
+        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
+            (click)="moveIssue(issue.id)">
+          <span class="text-orange-600">➡️</span> Move
+        </li>
+
+        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80">
+          <span class="text-green-600">📋</span> List
+        </li>
+
+        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
+            (click)="assignIssue(issue.id)">
+          <span class="text-green-600">👤</span> Assign
+        </li>
+      </ul>
     </div>
-
-    <!--will loop the added-->
-    <ul class="space-y-2">
-        @for (issue of issues; track issue.title) {
-            <li class="bg-white p-2 rounded shadow text-left">
-            {{ issue.title }}
-            </li>
-        }
-    </ul>
-
-
+  }
+</div>

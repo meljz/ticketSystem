@@ -10,8 +10,7 @@ use Illuminate\Support\Str;          // For token generation
 
 class AuthController extends Controller
 { 
-    public function register (Request $request){
-        
+    public function register (Request $request){    
     //this will validate datass
         $this->validate($request, [
             'name' => 'required|string',
@@ -32,13 +31,11 @@ class AuthController extends Controller
     ], 201);
     }
 
-    public function login (Request $request){
-        
+    public function login(Request $request){
         //validate natin
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required'
-
         ]);
 
         //query sa db ng email
@@ -47,7 +44,7 @@ class AuthController extends Controller
         //checking if true then fire
         if ($user && Hash::check($request->input('password'), $user->password)){
 
-             // Save user ID in session
+             // lumen dont support session based, only tokens
             $request->session()->put('user_id', $user->id);
 
             return response()->json([

@@ -5,7 +5,7 @@ import { IssueComponent } from "../../issue/issue.component";
 
 @Component({
   selector: 'app-kanboard',
-  imports: [RouterLink, SidebarComponent, IssueComponent],
+  imports: [SidebarComponent, IssueComponent],
   templateUrl: './kanboard.component.html',
   styleUrl: './kanboard.component.css'
 })

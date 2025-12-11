@@ -1,53 +1,70 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IssueService } from '../services/issue.service'; // adjust path if needed
 
 @Component({
   selector: 'app-issue',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './issue.component.html',
   styleUrl: './issue.component.css'
 })
-
 export class IssueComponent {
-  showInput = false; //will only triggered when its true (when createIssue is clicked)
+  @Input() moveStatus: string = ''; // column status from Kanban parent
+
+  // UI state
+  showInput = false;
   moveInput = false;
-  
-  newIssueTitle = ''; //for input
-  issueStatus = ''; //for input
 
+  // Tracking
+  selectedIssueId: number | null = null;
 
-  //array to append
-  issues: {title: string} [] = [];
+  // Form fields
+  newIssueTitle = '';
+  issueStatus = '';
 
-  createIssue (){ //will only fire/show form once clicked
+  constructor(private issueService: IssueService) {}
+
+  /** Show create issue form */
+  createIssue() {
     this.showInput = true;
-
-  
-  }
-  saveIssue() { //will hide again once button of saveIssue is clickeds
-    this.issues.push ({title: this.newIssueTitle})
-    console.log("Appended:", this.newIssueTitle);
-    
-    this.showInput = false;
-    this.newIssueTitle;
     this.moveInput = false;
-    this.issueStatus;
-
-    //this will push to the array
-    this.issues.push({
-      title: this.newIssueTitle,   
-    });
-
-    console.log("this will be appended: ", this.newIssueTitle); //this is where it will store 
-    
-    this.newIssueTitle;
-
-
+    this.selectedIssueId = null;
   }
 
-  moveIssue() {
-    console.log("Where to move?");
+  /** Save a new issue into the shared service */
+  submitNewIssue() {
+    if (this.newIssueTitle.trim()) {
+      this.issueService.addIssue(this.newIssueTitle.trim(), this.moveStatus);
+      this.newIssueTitle = '';
+      this.showInput = false;
+    }
+  }
+
+  /** Trigger move form for a specific issue */
+  moveIssue(id: number) {
+    this.selectedIssueId = id;
     this.moveInput = true;
+    this.showInput = false;
   }
 
+  /** Confirm move and update issue status in the service */
+  confirmMoveIssue() {
+    if (this.selectedIssueId !== null && this.issueStatus) {
+      this.issueService.updateIssueStatus(this.selectedIssueId, this.issueStatus);
+      this.issueStatus = '';
+      this.selectedIssueId = null;
+      this.moveInput = false;
+    }
+  }
+
+  /** Filter issues for this column */
+  get filteredIssues() {
+    return this.issueService.getIssuesByStatus(this.moveStatus);
+  }
+
+  /** Assign issue placeholder */
+  assignIssue(id: number) {
+    alert(`Assigning issue ${id}`);
+  }
 }
