@@ -56,4 +56,13 @@ export const routes: Routes = [
         },
     },
 
+    {
+        path: 'listuser',
+        loadComponent: () => {
+            return import ("./dashboard/list-users/list-users.component").then (
+                m => m.ListUsersComponent
+            );
+        },
+    },
+
 ];

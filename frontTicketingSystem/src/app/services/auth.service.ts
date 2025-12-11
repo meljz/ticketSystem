@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,13 +18,16 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
 
-   logout() {
+   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}); // call Lumen logout
   }
 
-  getUser(){
-    return this.http.get('api/users')
-  }
+ getUsers(token: string): Observable<any[]> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+  return this.http.get<any[]>(`${this.apiUrl}/users`, { headers });
+}
 
 
 }
