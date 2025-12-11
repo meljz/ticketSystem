@@ -26,16 +26,17 @@ export class LoginComponent {
       .subscribe({
         next: res => 
           {
-          
+  
           localStorage.setItem('token', res.token); //saves token (sessionbased) from backend controller
-          alert('login success'); 
+          localStorage.setItem('name', res.user.name);
+          alert('redirecting sa home '); 
           this.router.navigate(['/']);
           },
 
         error: err => console.error('Login failed:', err)
 
-      });
 
+      });  
 
   }
 }

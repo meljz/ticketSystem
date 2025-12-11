@@ -21,4 +21,10 @@ export class AuthService {
    logout() {
     return this.http.post(`${this.apiUrl}/logout`, {}); // call Lumen logout
   }
+
+  getUser(){
+    return this.http.get('api/users')
+  }
+
+
 }

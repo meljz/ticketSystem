@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IssueService } from '../services/issue.service'; // adjust path if needed
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-issue',
@@ -23,7 +24,9 @@ export class IssueComponent {
   newIssueTitle = '';
   issueStatus = '';
 
-  constructor(private issueService: IssueService) {}
+  constructor(
+    private issueService: IssueService,
+    private authService: AuthService) {}
 
   /** Show create issue form */
   createIssue() {
@@ -67,4 +70,12 @@ export class IssueComponent {
   assignIssue(id: number) {
     alert(`Assigning issue ${id}`);
   }
+
+  ngOnInit() {
+    this.issueService.getIssues().subscribe(res => {
+      console.log('Issues from backend:', res);
+    });
+;
+}
+
 }

@@ -1,22 +1,29 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { LogoutComponent } from '../../auth/logout/logout.component';
+
 
 @Component({
   selector: 'app-primary-button',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ],
   templateUrl: './primary-button.component.html',
   styleUrl: './primary-button.component.css'
 })
 export class PrimaryButtonComponent {
   constructor(private router: Router) {}
 
-  titleButton = 'Hello';
-   onClick() {
-    //alert('Button clicked!');
-    alert('Navigating to Home Page');
+  logout() {
+    localStorage.removeItem('token'); // destroy saved token
+    localStorage.removeItem('name'); // destroy saved name
+    alert('Logged out successADADASfully');
+    this.router.navigate(['/login']); // redirect to login page
   }
+
+  login(){
+    
+
+  }
+
   
 
 }

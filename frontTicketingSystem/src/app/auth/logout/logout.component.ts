@@ -15,8 +15,9 @@ export class LogoutComponent {
     this.authService.logout().subscribe({
       next: (res:any) => {
         console.log(res.message);
-        localStorage.removeItem('token'); // ❌ destroy token
-        this.router.navigate(['/login']); // ✅ go back to login
+        localStorage.removeItem('token'); // destroy saved token
+        localStorage.removeItem('name'); // destroys saved token
+        this.router.navigate(['/login']); // redirect
       },
       error: err => console.error('Logout failed:', err)
     });

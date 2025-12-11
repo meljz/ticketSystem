@@ -1,8 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { PrimaryButtonComponent } from '../primary-button/primary-button.component';
 
-  
-
 
 @Component({
   selector: 'app-header',
@@ -13,5 +11,11 @@ import { PrimaryButtonComponent } from '../primary-button/primary-button.compone
 })
 export class HeaderComponent {
   title = signal('Ticketing System');
+
+  name: string = '';
+
+  ngOnInit() {
+    this.name = localStorage.getItem('name') || '';
+  }
 
 }

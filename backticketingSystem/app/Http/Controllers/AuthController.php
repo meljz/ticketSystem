@@ -10,8 +10,18 @@ use Illuminate\Support\Str;          // For token generation
 
 class AuthController extends Controller
 { 
+
+    public function index(Request $request) {
+    $user = User::where('api_token', $request->bearerToken())->first();
+    if (!$user) {
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
+
+    return response()->json(Issue::all());
+}
+
+
     public function register (Request $request){    
-    //this will validate datass
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
@@ -31,36 +41,43 @@ class AuthController extends Controller
     ], 201);
     }
 
-    public function login(Request $request){
-        //validate natin
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+   public function login(Request $request) {
+    $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
 
-        //query sa db ng email
-        $user = User::where('email', $request->input('email'))->first();
+    $user = User::where('email', $request->input('email'))->first();
 
-        //checking if true then fire
-        if ($user && Hash::check($request->input('password'), $user->password)){
+    if ($user && Hash::check($request->input('password'), $user->password)) {
 
-             // lumen dont support session based, only tokens
-            $request->session()->put('user_id', $user->id);
+         // Generate random token
+        $token = Str::random(60);
+        $user->api_token = $token;
+        $user->save();
 
-            return response()->json([
-                'message' => 'login successful',
-                'user' => $user,
-                'token' => session()->getId() // session ID
-            ], 200);
-        }
+        // sends json back with the user and token
         return response()->json([
-            'messaage' => 'invalid credentials'
-        ], 401);   
-     }  
+            'message' => 'login successful',
+            'user' => $user,
+            'token' => $token
+        ], 200);
+    }
+
+    return response()->json([
+        'message' => 'invalid credentials'
+    ], 401);
+}
+
 
     public function logout(Request $request) {
-        $request->session()->invalidate();
-        return response()->json(['message' => 'Logged out']);
-}
+        $user = User::where('api_token', $request->bearerToken())->first();
+        if ($user) {
+            $user->api_token = null;
+            $user->save();
+        }
+        return response()->json(['message' => 'Logged out successfully']);
+    }
+
 
 }
