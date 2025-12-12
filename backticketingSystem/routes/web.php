@@ -17,16 +17,18 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+/* -------------------BACKEND ENDPOINTS API for users (login/register purpose)-------------------*/
 $router->post('/register', 'AuthController@register');
 $router->post('/login', 'AuthController@login');
+$router->post('/logout', 'AuthController@logout');
 $router->get('/user', 'AuthController@index');
 
-
+/* -----------------BACKEND ENDPOINTS API for tickets--------------------*/
 $router->group(['prefix' => 'api/tickets'], function () use ($router){
-    $router->get('/', 'TicketController@index');
-    $router->post('/', 'TicketController@store');
-    $router->get('/{id}', 'TicketController@show');
-    $router->put('/{id}', 'TicketController@update');
-    $router->delete('/{id}', 'TicketController@destroy');
-    $router->put('/{id}/assign', 'TicketController@assign');
+    $router->get('/', 'TicketController@index');      //this will list all users
+    $router->post('/', 'TicketController@store');      // this will input then store user in db
+    $router->get('/{id}', 'TicketController@show');  //  this will get user specifically
+    $router->put('/{id}', 'TicketController@update');   //this will update users
+    $router->delete('/{id}', 'TicketController@destroy');   //this will delete specific user
+    $router->put('/{id}/assign', 'TicketController@assign');   //working na, but logic is incorrect pa 
 });

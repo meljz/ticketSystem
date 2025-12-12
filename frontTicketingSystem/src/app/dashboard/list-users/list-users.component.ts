@@ -18,14 +18,13 @@ export class ListUsersComponent implements OnInit {
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
-     this.authService.getUsers(token).subscribe({
-  next: (data) => {
-    console.log('Backend response:', data); // should log array
-    this.users = data; // assign directly
-  },
-  error: (err) => console.error('Error fetching users:', err)
-});
-
+      this.authService.getUsers(token).subscribe({
+        next: (data) => {
+          console.log('Backend response:', data); // should log array
+          this.users = data; // assign directly
+        },
+        error: (err) => console.error('Error fetching users:', err)
+      });
+    }
   }
-  }
-  }
+}

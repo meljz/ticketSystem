@@ -13,15 +13,11 @@ export class PrimaryButtonComponent {
   constructor(private router: Router) {}
 
   logout() {
+    alert('checkmsg deleting 1');
     localStorage.removeItem('token'); // destroy saved token
-    localStorage.removeItem('name'); // destroy saved name
-    alert('Logged out successADADASfully');
+    localStorage.removeItem('pangalan'); // destroy saved name
+    alert('checkmsg deleting 2');
     this.router.navigate(['/login']); // redirect to login page
-  }
-
-  login(){
-    
-
   }
 
   

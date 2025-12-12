@@ -1,30 +1,27 @@
 <body class="m-0 overflow-x-hidden">
-  <section class="flex w-full min-h-[90vh]">
-
+  <section class="flex w-full h-screen">
     <!-- Sidebar -->
     <app-sidebar></app-sidebar>
 
     <!-- Kanban Board -->
-    <div class="flex flex-1 flex-row justify-center gap-10 p-6 bg-gray-100 min-h-screen overflow-x-auto">
-
+    <div class="flex flex-1 flex-row justify-center gap-10 p-6 bg-gray-100 overflow-x-auto">
       <!-- To Do -->
-      <div class="flex-shrink-0 w-96 bg-gray-200 rounded-lg shadow-md p-4">
+      <div class="w-full sm:w-96 bg-gray-200 rounded-lg shadow-md p-4">
         <h2 class="text-lg font-bold mb-4">To Do</h2>
         <app-ticket [moveStatus]="'todo'"></app-ticket>
       </div>
 
       <!-- In Progress -->
-      <div class="flex-shrink-0 w-96 bg-gray-200 rounded-lg shadow-md p-4">
+      <div class="w-full sm:w-96 bg-gray-200 rounded-lg shadow-md p-4">
         <h2 class="text-lg font-bold mb-4">In Progress</h2>
         <app-ticket [moveStatus]="'in-progress'"></app-ticket>
       </div>
 
       <!-- Done -->
-      <div class="flex-shrink-0 w-96 bg-gray-200 rounded-lg shadow-md p-4">
+      <div class="w-full sm:w-96 bg-gray-200 rounded-lg shadow-md p-4">
         <h2 class="text-lg font-bold mb-4">Done</h2>
         <app-ticket [moveStatus]="'done'"></app-ticket>
       </div>
-
     </div>
   </section>
 </body>

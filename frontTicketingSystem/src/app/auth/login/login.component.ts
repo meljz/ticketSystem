@@ -26,9 +26,8 @@ export class LoginComponent {
       .subscribe({
         next: res => 
           {
-  
-          localStorage.setItem('token', res.token); //saves token (sessionbased) from backend controller
-          localStorage.setItem('name', res.user.name);
+          localStorage.setItem('token', res.token); //saves token 
+          localStorage.setItem('pangalan', res.user.name);//saves name
           alert('redirecting sa home '); 
           this.router.navigate(['/']);
           },

@@ -12,10 +12,6 @@ import { PrimaryButtonComponent } from '../primary-button/primary-button.compone
 export class HeaderComponent {
   title = signal('Ticketing System');
 
-  name: string = '';
 
-  ngOnInit() {
-    this.name = localStorage.getItem('name') || '';
-  }
 
 }

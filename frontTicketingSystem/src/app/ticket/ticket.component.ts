@@ -12,16 +12,21 @@ import { TicketService } from '../services/ticket.service';
 export class TicketComponent implements OnInit {
   @Input() moveStatus: string = ''; // column status from Kanban parent
 
-  // UI state
+  // hides initially the move and form
   showInput = false;
   moveInput = false;
+  showAssign = false;
 
   // Tracking
   selectedTicketId: number | null = null;
+  //assigneeTicketId: number | null = null;
+  
 
   // Form fields
   newTicketTitle = '';
   ticketStatus = '';
+  testWater = '';
+  trial = true;
 
   // Tickets loaded from backend
   tickets: any[] = [];
@@ -39,7 +44,7 @@ export class TicketComponent implements OnInit {
     });
   }
 
-  /** Show create ticket form */
+  //------shows create form--------------
   createTicket() {
     alert('hello');
     this.showInput = true;
@@ -47,11 +52,15 @@ export class TicketComponent implements OnInit {
     this.selectedTicketId = null;
   }
 
-  /** Save a new ticket into backend */
+  
+
+  //-------Save a new ticket, then sends to backedn-------
   submitNewTicket() {
-    if (this.newTicketTitle.trim()) {
-      this.ticketService.addTicket(this.newTicketTitle.trim(), this.moveStatus)
-        .subscribe(() => {
+    if (this.newTicketTitle) {
+      alert('ticket submitting!');
+      this.ticketService.addTicket(this.newTicketTitle, this.moveStatus)
+      .subscribe(() => {
+         alert ('subscribe is being fired')
           this.newTicketTitle = '';
           this.showInput = false;
           this.refreshTickets();
@@ -59,29 +68,46 @@ export class TicketComponent implements OnInit {
     }
   }
 
-  /** Trigger move form for a specific ticket */
+
+  createAssign(){
+    alert ('showing assign section');
+    this.showAssign = true;
+  }
+
+ confirmAssign(){
+  alert("confirming ticket");
+  this.showAssign = false; //will hide again the assign after submitng
+ }
+
+ //--------shows move form--------------
   moveTicket(id: number) {
+    alert ('shows move section')
     this.selectedTicketId = id;
     this.moveInput = true;
     this.showInput = false;
   }
 
-  /** Confirm move and update ticket status in backend */
+  
+  //-------confirm a ticket, then saves new ticket into backend-------
   confirmMoveTicket() {
     if (this.selectedTicketId !== null && this.ticketStatus) {
+      alert('moving ticket to chosen column')
       this.ticketService.updateTicketStatus(this.selectedTicketId, this.ticketStatus)
         .subscribe(() => {
           this.ticketStatus = '';
           this.selectedTicketId = null;
-          this.moveInput = false;
+          this.moveInput = false; 
           this.refreshTickets();
         });
     }
   }
 
-  /** Assign ticket to a user (placeholder user_id = 1) */
-  assignTicket(id: number) {
-    this.ticketService.assignTicket(id, 1).subscribe(() => this.refreshTickets());
+
+  //delete thisssss
+  tryClick(){
+    if(this.trial){
+      alert('trial run');
+    }
   }
 
   /** Filtered tickets for this column */

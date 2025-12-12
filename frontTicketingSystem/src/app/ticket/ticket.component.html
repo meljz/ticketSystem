@@ -3,7 +3,7 @@
   <div class="bg-white rounded-xl shadow-lg text-center w-full p-4">
     <h2 class="text-xl font-bold mb-4">TICKET LIST</h2>
 
-    <!-- Create Ticket Form -->
+    <!-- falseWindow: shows Ticket Form -->
     @if (showInput) {
       <form class="mt-4 p-2 bg-gray-50 rounded-lg">
         <textarea [(ngModel)]="newTicketTitle"
@@ -20,21 +20,23 @@
       </form>
     }
 
-    <!-- Action Buttons -->
+    <!-- create ticket Buttons -->
     <ul class="flex flex-row gap-5 justify-center mt-6 pt-4 border-t">
       <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
           (click)="createTicket()">
         <span class="text-blue-600">➕</span> Create
       </li>
     </ul>
-  </div>
+</div>
 
   <!-- Individual Ticket Cards -->
   @for (ticket of filteredTickets; track ticket.id) {
-    <div class="bg-white text-black p-4 rounded-xl shadow-lg w-full text-left">
-      {{ ticket.title }}
+    <div class="bg-white text-black p-4 rounded-xl shadow-lg w-full text-center">
+      <div class = text-xl>
+        {{ ticket.title }}
+      </div>
 
-      <!-- Move Ticket Options -->
+      <!-- falseWindow: Move Ticket Options -->
       @if (moveInput && selectedTicketId === ticket.id) {
         <div class="mt-4 p-4 bg-gray-50 rounded-lg">
           <h3 class="text-lg font-semibold mb-2">Moving to...</h3>
@@ -44,7 +46,6 @@
             <option value="">Select status</option>
             <option value="todo">Todo</option>
             <option value="in-progress">In Progress</option>
-            <option value="done">Done</option>
           </select>
           <button (click)="confirmMoveTicket()"
                   class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
@@ -53,19 +54,41 @@
         </div>
       }
 
-      <!-- Action Buttons -->
+      @if (showAssign ){
+        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+            <h3 class="text-lg font-semibold mb-2 bg-green-300 rounded">Assigning to...</h3>
+            <select [(ngModel)]="ticketStatus"
+                    name="ticketStatus"
+                    class="border p-2 rounded w-full mb-2">
+              <option value="">Choose to assign</option>
+                <option value="id">{{ ticket.id }} - {{ ticket.title }}</option>
+                <option value="id">Done</option>
+            </select>
+            <button (click)="confirmAssign()"
+                  class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Assign
+          </button>
+        </div>
+      }
+
+   
+    
+
+      <!-- falseWindow: Buttons after creation-->
       <ul class="flex flex-row gap-5 justify-center mt-6 pt-4 border-t">
         <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
             (click)="moveTicket(ticket.id)">
           <span class="text-orange-600">➡️</span> Move
         </li>
 
+        <!--
         <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80">
           <span class="text-green-600">📋</span> List
         </li>
-
+        -->
+        
         <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
-            (click)="assignTicket(ticket.id)">
+            (click)="createAssign()">
           <span class="text-green-600">👤</span> Assign
         </li>
       </ul>

@@ -12,13 +12,4 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent { 
 
-//THIS SETS AS A GUARD, IT WILL CHECK ANY TOKEN OR SESSION BASED SOMETHING
-
-  /*constructor(private router: Router) {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      // If no token, send back to login
-      this.router.navigate(['/login']);
-    }
-  }*/
 }

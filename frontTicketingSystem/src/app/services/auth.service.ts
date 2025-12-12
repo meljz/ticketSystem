@@ -18,15 +18,15 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
 
-   logout(): Observable<any> {
+  logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}); // call Lumen logout
   }
 
  getUsers(token: string): Observable<any[]> {
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`
-  });
-  return this.http.get<any[]>(`${this.apiUrl}/users`, { headers });
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  return this.http.get<any[]>(`${this.apiUrl}/user`, { headers });
 }
 
 

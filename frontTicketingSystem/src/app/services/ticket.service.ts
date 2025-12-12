@@ -15,7 +15,7 @@ export class TicketService {
 
   addTicket(title: string, status: string): Observable<any> {
     const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
-    return this.http.post(this.apiUrl, { title, status }, { headers });
+    return this.http.post(this.apiUrl, { title, status }, { headers }); // magsend ng POST request 'to using this url na may kasamang title and status.
   }
 
   updateTicketStatus(id: number, status: string): Observable<any> {

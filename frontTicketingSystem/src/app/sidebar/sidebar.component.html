@@ -1,22 +1,21 @@
-<aside class="h-full w-70 bg-gray-500 text-white flex flex-col">
+<aside class="min-h-screen w-70 bg-gray-400 text-white flex flex-col ">
 
-
-  <!-- Navigation -->
-  <nav class="flex-1 p-4 space-y-2">
-    <a routerLink="/" class="block p-2 rounded hover:bg-gray-800 cursor-pointer">
+  <nav class="p-4 space-y-4">
+    <a class="block p-2 text-xl rounded hover:bg-gray-800 cursor-pointer" routerLink="/">
       🏠 Dashboard
     </a>
-    <a class="block p-2 rounded hover:bg-gray-800 cursor-pointer" routerLink= "/kanboard">
+    <a class="block p-2 text-xl rounded hover:bg-gray-800 cursor-pointer" routerLink="/kanboard">
       📋 Kanban Board
     </a>
-
-    <a class="block p-2 rounded hover:bg-gray-800 cursor-pointer" routerLink= "/listuser">
-      📋List user
+    <a class="block p-2 text-xl rounded hover:bg-gray-800 cursor-pointer" routerLink="/listuser">
+      Test: List user
     </a>
-
-
-
   </nav>
 
-  <!-- User Profile -->
+  <div class="mt-auto p-4">
+    <div class="bg-orange-400 p-2 text-xl rounded text-white">
+      User: {{ pangalan }}
+    </div>
+  </div>
+
 </aside>

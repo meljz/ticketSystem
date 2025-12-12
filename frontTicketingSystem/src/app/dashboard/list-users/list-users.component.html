@@ -1,8 +1,18 @@
-<h2>Users List</h2>
-<ul>
-  <li *ngFor="let user of users">
-    {{ user.name }} - {{ user.email }}
-  </li>
-</ul>
+<body class="m-0 overflow-x-hidden h-screen">
+  <section class="flex w-full h-screen">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
 
-<p *ngIf="users.length === 0">No users found.</p>
+    <!-- Main content -->
+    <div class="flex-1 p-6 bg-gray-100 overflow-auto">
+      <h2 class="text-xl font-bold mb-4">Users List</h2>
+      <ul class="space-y-2">
+        <li *ngFor="let user of users" class="p-2 bg-gray-200 rounded p-5">
+          <span class="text-orange-600 text-bold  text-xl"> Users {{user.id}}: </span>{{ user.name }} 
+          <span class ="text-orange-600  text-xl"> User Email: </span> {{ user.email }}
+        </li>
+      </ul>
+      <p *ngIf="users.length === 0" class="text-gray-500">No users found.</p>
+    </div>
+  </section>
+</body>

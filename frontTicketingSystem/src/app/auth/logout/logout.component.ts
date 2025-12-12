@@ -12,11 +12,12 @@ export class LogoutComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   logout(){
+    alert('asdasd')
     this.authService.logout().subscribe({
       next: (res:any) => {
         console.log(res.message);
         localStorage.removeItem('token'); // destroy saved token
-        localStorage.removeItem('name'); // destroys saved token
+        localStorage.removeItem('pangalan'); // destroys saved token
         this.router.navigate(['/login']); // redirect
       },
       error: err => console.error('Logout failed:', err)
