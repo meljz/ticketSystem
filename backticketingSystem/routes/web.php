@@ -19,5 +19,14 @@ $router->get('/', function () use ($router) {
 
 $router->post('/register', 'AuthController@register');
 $router->post('/login', 'AuthController@login');
-$router->get('/user', ['AuthController@user']);
+$router->get('/user', 'AuthController@index');
 
+
+$router->group(['prefix' => 'api/tickets'], function () use ($router){
+    $router->get('/', 'TicketController@index');
+    $router->post('/', 'TicketController@store');
+    $router->get('/{id}', 'TicketController@show');
+    $router->put('/{id}', 'TicketController@update');
+    $router->delete('/{id}', 'TicketController@destroy');
+    $router->put('/{id}/assign', 'TicketController@assign');
+});
