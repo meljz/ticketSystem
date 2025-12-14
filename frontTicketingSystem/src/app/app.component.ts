@@ -12,7 +12,7 @@ import { HeaderComponent } from './component/header/header.component';
 
   template: `
     <app-header></app-header>
-      <main class="flex-1 ml-64 p-6 bg-gray-400 min-h-screen  ">
+      <main class="flex-1 ml-64 p-6 bg-gray-400">
         <router-outlet></router-outlet>
       </main>
   `,
