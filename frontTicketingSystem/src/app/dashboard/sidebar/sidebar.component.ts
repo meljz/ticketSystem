@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { KanboardComponent } from '../dashboard/kanboard/kanboard.component';
-import { HomeComponent } from '../dashboard/home/home.component';
+import { KanboardComponent } from '../kanboard/kanboard.component';
+import { HomeComponent } from '../home/home.component';
 import { RouterLink } from '@angular/router';
 
 

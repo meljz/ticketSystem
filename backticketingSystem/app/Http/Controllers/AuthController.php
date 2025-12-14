@@ -80,6 +80,22 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logged out successfully']);
 }
 
+public function checkLoggedIn(Request $request)
+{
+    $token = $request->bearerToken();
+    $user = User::where('api_token', $token)->first();
+
+    if (!$user) {
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
+
+    return response()->json([
+        'id' => $user->id,
+        'name' => $user->name,
+        'email' => $user->email
+    ]);
+}
+
 
 
 }

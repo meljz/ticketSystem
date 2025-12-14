@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '../../sidebar/sidebar.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Router, RouterLink } from '@angular/router';
 
 import { TicketComponent } from '../../ticket/ticket.component';

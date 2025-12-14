@@ -18,10 +18,13 @@ $router->get('/', function () use ($router) {
 });
 
 /* -------------------BACKEND ENDPOINTS API for users (login/register purpose)-------------------*/
-$router->post('/register', 'AuthController@register');
-$router->post('/login', 'AuthController@login');
-$router->post('/logout', 'AuthController@logout');
-$router->get('/user', 'AuthController@index');
+$router->group(['prefix' => 'auth'], function () use ($router) {
+    $router->post('/register', 'AuthController@register');
+    $router->post('/login', 'AuthController@login');
+    $router->post('/logout', 'AuthController@logout');
+    $router->get('/users', 'AuthController@index');
+    $router->get('/checkuser', 'AuthController@checkLoggedIn');
+});
 
 /* -----------------BACKEND ENDPOINTS API for tickets--------------------*/
 $router->group(['prefix' => 'api/tickets'], function () use ($router){

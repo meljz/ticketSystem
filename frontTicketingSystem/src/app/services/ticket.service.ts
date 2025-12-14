@@ -23,10 +23,12 @@ export class TicketService {
     return this.http.put(`${this.apiUrl}/${id}`, { status }, { headers });
   }
 
-  assignTicket(id: number, userId: number): Observable<any> {
-    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
-    return this.http.put(`${this.apiUrl}/${id}/assign`, { assigned_to: userId }, { headers });
-  }
+  // In ticket.service.ts
+assignTicket(ticketId: number, userId: string): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${ticketId}/assign`, { 
+    assigned_to: userId 
+  });
+}
 
   deleteTicket(id: number): Observable<any> {
     const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };

@@ -1,18 +1,20 @@
 <div class="flex justify-center items-center mt-4 gap-2">
-  
-  <a class="bg-blue-500 text-white px-4 py-2 rounded" routerLink="/" >
-        Dashboard
-  </a> 
+  @if (isLoggedIn && !isAuthPage) {
+    <!-- Show Logout only when logged in and not on login/register -->
+    <a class="bg-orange-400 text-white px-4 py-2 rounded cursor-pointer" (click)="logout()">
+            Logout
+    </a>
+      <a class=" text-white px-4 py-2 rounded cursor-pointer">
+            | {{ pangalan }}
+    </a>
 
-  <a class="bg-violet-500 text-white px-4 py-2 rounded cursor-pointer" routerLink="/login">
-        Login
-  </a> 
-
-  <a class="bg-violet-500 text-white px-4 py-2 rounded cursor-pointer" routerLink="/register" >
-        Register
-  </a> 
-
-   <a class="bg-orange-400 text-white px-4 py-2 rounded cursor-pointer" (click)="logout()" >
-        Logout
-  </a> 
+  } @else{
+    <!-- Show Login/Register only when not logged in and not on home -->
+    <a class="bg-violet-500 text-white px-4 py-2 rounded cursor-pointer" routerLink="/login">
+      Login
+    </a>
+    <a class="bg-violet-500 text-white px-4 py-2 rounded cursor-pointer" routerLink="/register">
+      Register
+    </a>
+  }
 </div>
