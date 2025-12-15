@@ -195,7 +195,7 @@ export class TicketComponent implements OnInit {
   /** Refresh tickets from backend and filter by column status */
   refreshTickets() {
     this.ticketService.getTickets().subscribe({
-      next: (response) => {
+      next: (response: any) => {
         console.log("Raw tickets from backend:", response);
         
         // Check if response has a getTickets property (based on your backend)
