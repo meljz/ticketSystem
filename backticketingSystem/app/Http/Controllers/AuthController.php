@@ -33,8 +33,7 @@ class AuthController extends Controller
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
             ]);
-
-        //returns JSON response
+            
         return response()->json([
             'message'=> 'user register successfully',
             'users' => $user
@@ -80,7 +79,7 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logged out successfully']);
 }
 
-public function checkLoggedIn(Request $request)
+    public function checkLoggedIn(Request $request)
 {
     $token = $request->bearerToken();
     $user = User::where('api_token', $token)->first();

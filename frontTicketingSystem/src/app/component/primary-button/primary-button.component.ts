@@ -27,10 +27,9 @@ export class PrimaryButtonComponent {
 
    
   logout() {
-    alert('checkmsg deleting 1');
+    alert('logout check msg');
     localStorage.removeItem('token'); // destroy saved token
     localStorage.removeItem('pangalan'); // destroy saved name
-    alert('checkmsg deleting 2');
     this.router.navigate(['/login']); // redirect to login page
   }
 

@@ -30,7 +30,7 @@ assignTicket(ticketId: number, userId: string): Observable<any> {
   });
 }
 
-  deleteTicket(id: number): Observable<any> {
+deleteTicket(id: number): Observable<any> {
     const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
     return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }

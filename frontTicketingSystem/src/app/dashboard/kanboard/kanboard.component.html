@@ -4,24 +4,40 @@
     <app-sidebar></app-sidebar>
 
     <!-- Kanban Board -->
-    <div class="flex flex-1 flex-row justify-center gap-10 p-6 bg-gray-700 overflow-x-auto">
+    <div class="flex flex-1 flex-col justify-center gap-2 p-6 bg-white overflow-x-auto">
+
+      <!--TOP-->
+      
+      <div class="flex flex-row gap-2">
+        <div class=" w-full  bg-gray-50 rounded-lg shadow-md p-4 mb-2 space-x-4">
+            <span class=" rounded p-2 text-xl">Team: </span>
+          @for (user of users; track user.id) {
+            <span class = "bg-green-100 p-2 text-ms rounded">{{ user.name }}</span>
+          }
+        </div>
+      </div>
+ 
+       
+      <!--BOTTOM-->
       <!-- To Do -->
-      <div class="w-full sm:w-96 bg-gray-200 rounded-lg shadow-md p-4">
-        <h2 class="text-xl font-bold mb-4 rounded-lg bg-amber-300 w-full p-3 shadow-lg text-center">To Do</h2>
-        <app-ticket [moveStatus]="'todo'"></app-ticket>
-      </div>
+       <div class = "flex flex-1 flex-row justify-center gap-15 p-6 bg-gray-100 overflow-x-auto rounded">
+        <div class="w-full  bg-gray-50 rounded-lg shadow-md p-4">
+          <h2 class="text-xl font-bold mb-4 rounded-lg bg-amber-300 w-full p-3 shadow-lg text-center">To Do</h2>
+          <app-ticket [moveStatus]="'todo'"></app-ticket>
+        </div>
 
-      <!-- In Progress -->
-      <div class="w-full sm:w-96 bg-gray-200 rounded-lg shadow-md p-4">
-        <h2 class="text-xl font-bold mb-4  rounded-lg bg-orange-300 w-full p-3 shadow-lg text-center">In Progress</h2>
-        <app-ticket [moveStatus]="'in-progress'"></app-ticket>
-      </div>
+        <!-- In Progress -->
+        <div class="w-full bg-gray-50 rounded-lg shadow-md p-4">
+          <h2 class="text-xl font-bold mb-4  rounded-lg bg-orange-300 w-full p-3 shadow-lg text-center">In Progress</h2>
+          <app-ticket [moveStatus]="'in-progress'"></app-ticket>
+        </div>
 
-      <!-- Done -->
-      <div class="w-full sm:w-96 bg-gray-200 rounded-lg shadow-md p-4">
-        <h2 class="text-xl font-bold mb-4  rounded-lg bg-green-300 w-full p-3 shadow-lg text-center">Done</h2>
-        <app-ticket [moveStatus]="'done'"></app-ticket>
+        <!-- Done -->
+        <div class="w-full  bg-gray-50 rounded-lg shadow-md p-4">
+          <h2 class="text-xl font-bold mb-4  rounded-lg bg-green-300 w-full p-3 shadow-lg text-center">Resolved</h2>
+          <app-ticket [moveStatus]="'done'"></app-ticket>
+        </div>
+        </div>
       </div>
-    </div>
   </section>
 </body>

@@ -7,7 +7,7 @@ import { KanboardComponent } from "../kanboard/kanboard.component";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidebarComponent, KanboardComponent],
+  imports: [SidebarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
