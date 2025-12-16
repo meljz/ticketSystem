@@ -5,13 +5,16 @@
 
     <!-- Main content -->
     <div class="flex-1 p-6 bg-gray-100 overflow-auto">
+
       <h2 class="text-xl font-bold mb-4">Users List</h2>
+
       <ul class="space-y-2">
-        <li *ngFor="let user of users" class="p-2 bg-gray-200 rounded p-5">
+        <li *ngFor="let user of users" class="p-2 bg-gray-100 shadow-md rounded p-5">
           <span class="text-orange-600 text-bold  text-xl"> Users {{user.id}}: </span>{{ user.name }} 
           <span class ="text-orange-600  text-xl"> User Email: </span> {{ user.email }}
         </li>
       </ul>
+
     </div>
   </section>
 </body>

@@ -18,6 +18,7 @@ export class LogoutComponent {
         console.log(res.message);
         localStorage.removeItem('token'); // destroy saved token
         localStorage.removeItem('pangalan'); // destroys saved token
+        localStorage.removeItem('pangalan_id');
         this.router.navigate(['/login']); // redirect
       },
       error: err => console.error('Logout failed:', err)

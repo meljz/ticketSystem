@@ -28,6 +28,7 @@ export class LoginComponent {
         next: res => 
           {
           localStorage.setItem('token', res.token); //saves token 
+          localStorage.setItem('pangalan_id', res.user.id.toString()); // saves the names id rather then name. (this is not triggering yet)
           localStorage.setItem('pangalan', res.user.name);//saves name
           alert('redirecting sa home '); 
           setTimeout(() => this.router.navigate(['/']), 500);
