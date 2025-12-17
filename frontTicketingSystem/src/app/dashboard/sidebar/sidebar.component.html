@@ -1,15 +1,28 @@
-<aside class="min-h-screen w-70 h-full shadow-2xl bg-gray-400 text-black  flex flex-col border-r-2 ">
+<aside class="min-h-screen w-70 h-full shadow-2xl bg-gray-200 text-black flex flex-col border-r py-10">
 
-  <nav class="p-2 space-y-6  ">
-    <a class="block p-2 text-lg text-white rounded bg-gray-500 hover:bg-orange-300  shadow-lg cursor-pointer" routerLink="/">
+  <nav class="p-2 space-y-4  ">
+    <h1 class = "text-3xl text-bold text-center border-b p-5">TicketingSystem</h1>
+
+    <a class="block p-2 text-center text-md  text-shadow-xs text-black-200 bg-white rounded-xl hover:bg-gray-50  shadow-lg cursor-pointer " routerLink="/">
        Dashboard
     </a>
-    <a class="block p-2 text-lg text-white rounded bg-gray-500 hover:bg-orange-300  shadow-lg cursor-pointer" routerLink="/kanboard">
-       Kanban Board
+
+    <a class="block p-2 text-center text-md text-shadow-xs text-black-200 rounded-xl bg-white hover:bg-gray-50  shadow-lg cursor-pointer" routerLink="/kanboard">
+        Kanban Board
     </a>
-    <a class="block p-2 text-lg text-white rounded bg-gray-500 hover:bg-orange-300  shadow-lg cursor-pointer"  routerLink="/listuser">
-      Test: List of Users
+    
+    <a class="block p-2 text-center text-md text-black-200 rounded-xl bg-white hover:bg-gray-50  shadow-lg cursor-pointer"  routerLink="/listuser">
+      List of Users
     </a>
   </nav>
 
+  <nav class = "mt-auto fp-2 space-y-6">
+
+     <a class="block px-2 text-2xl text-black-500  w-20">
+        {{ pangalan }}
+    </a>
+        <a class="block p-2 m-3 text-sm text-white  text-center rounded bg-orange-400 hover:bg-orange-600  shadow-lg cursor-pointer" (click)="logout()">
+            Logout
+    </a>
+  </nav>
 </aside>

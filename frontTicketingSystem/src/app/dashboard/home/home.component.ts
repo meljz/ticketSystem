@@ -5,6 +5,7 @@ import { KanboardComponent } from "../kanboard/kanboard.component";
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { TicketService } from '../../services/ticket.service';
+import { HeaderComponent } from '../../component/header/header.component';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,8 @@ import { TicketService } from '../../services/ticket.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
-  pangalan: string = '';
-  pangalan_id: number | null = null;
+  //pangalan: string = '';
+  //pangalan_id: number | null = null;
   users: any[] = [];
   tickets: any[] = [];
 
@@ -26,11 +27,19 @@ export class HomeComponent implements OnInit{
     public ticketService: TicketService
   ) {}
 
+  get pangalan(): string {
+    return localStorage.getItem ('pangalan') || '';
+  }
+
+  get pangalan_id(): string {
+    return localStorage.getItem ('pangalan_id') || '';
+  }
+
   ngOnInit(): void {
     this.loadUsers ();
     this.getTickets();
-    this.pangalan = localStorage.getItem ('pangalan') || ''; //this is for the name
-    this.pangalan_id = Number(localStorage.getItem('pangalan_id')); 
+    //this.pangalan = localStorage.getItem ('pangalan') || ''; //this is for the name
+    //this.pangalan_id = Number(localStorage.getItem('pangalan_id')); 
 
     const token = localStorage.getItem('token');
     if (!token){
@@ -40,17 +49,18 @@ export class HomeComponent implements OnInit{
   }
 
     loadUsers(): void {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.error('No token found');
-      return;
-    }
-
-    this.authService.getUsers(token).subscribe({
-      next: (data) => {
-        console.log('Users loaded:', data);
-        this.tickets = data; // ✅ Assign to component's users array
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert ('not login?');
+        console.error('No token found');
+        return;
       }
+      //if true
+      this.authService.getUsers(token).subscribe({
+        next: (data) => {
+          console.log('Users loaded:', data);
+          this.tickets = data; // ✅ Assign to component's users array
+        }
     });
   }
   //-----------------------------------------------

@@ -4,7 +4,9 @@
     <app-sidebar></app-sidebar>
 
     <!-- Main content -->
-    <div class="flex-1 p-6 bg-gray-100 overflow-auto">
+    <div class="flex flex-1  flex-col p-6 bg-gray-100 overflow-auto">
+      <div class = "flex flex-1 flex-row justify-center gap-10 p-6 bg-gray-200 rounded">
+          <div class="w-full  bg-gray-50 rounded-lg shadow-md p-4">
 
       <h2 class="text-xl font-bold mb-4">Users List</h2>
 
@@ -14,7 +16,8 @@
           <span class ="text-orange-600  text-xl"> User Email: </span> {{ user.email }}
         </li>
       </ul>
-
+        </div>
+      </div>
     </div>
   </section>
 </body>

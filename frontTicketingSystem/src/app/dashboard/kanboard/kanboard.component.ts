@@ -12,13 +12,16 @@ import { TicketComponent } from '../../ticket/ticket.component';
   styleUrl: './kanboard.component.css'
 })
 export class KanboardComponent implements OnInit{
-    constructor(private router: Router,
-      public authService: AuthService
-    ) {}
-      issues: { id: number; title: string; status: string }[] = [];
-       users: any[] = [];
+  constructor(
+    private router: Router,
+    public authService: AuthService
+  ) {}
 
-      
+
+  issues: { id: number; title: string; status: string }[] = [];
+  users: any[] = [];
+
+
         ngOnInit(): void {
           this.loadUsers();
         }

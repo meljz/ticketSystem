@@ -146,10 +146,11 @@ export class TicketComponent implements OnInit {
     return user ? user.name : 'Unknown User';
   }
 
+  /*
   getAssignedUserEmail(userId: number): string {
     const user = this.users.find(u => u.id === userId);
     return user ? user.email : '';
-  }
+  }*/
 
   loadUsers(): void {
     const token = localStorage.getItem('token');

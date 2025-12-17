@@ -5,15 +5,8 @@
     <!-- falseWindow: shows Ticket Form -->
     @if (showInput) {
       <form class="mt-4 p-2 bg-gray-50 rounded-lg">
-        <textarea [(ngModel)]="newTicketTitle"
-                  name="ticketTitle"
-                  placeholder="What is your ticket..."
-                  class="border p-2 rounded w-full h-24 mb-2">
-        </textarea>
-
-        <button type="button"
-                (click)="submitNewTicket()"
-                class="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <textarea [(ngModel)]="newTicketTitle" name="ticketTitle" placeholder="What is your ticket?" class="border p-2 rounded w-full h-24 mb-2"></textarea>
+        <button type="button" class="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700" (click)="submitNewTicket()">
           Confirm
         </button>
       </form>
@@ -21,16 +14,17 @@
 
     <!-- create ticket Buttons -->
     <ul class="flex flex-row gap-5 justify-center my-2">
-      <li class="flex items-center justify-center gap-2 cursor-pointer"
-          (click)="createTicket()">
+      <li class="flex items-center justify-center gap-2 cursor-pointer" (click)="createTicket()">
         <span class="text-blue-500">➕</span> Create Ticket
       </li>
     </ul>
-</div>
+
+  </div>
 
   <!-- Individual Ticket Cards -->
   @for (ticket of filteredTickets; track ticket.id) {
     <div class="bg-white text-black p-3 rounded-xl shadow-lg text-center">
+
       <div class = "text-bold text-lg">
         {{ ticket.id }} | {{ ticket.title }}
       </div>
@@ -40,17 +34,14 @@
         <div class="mt-4 p-4 border-2 rounded-lg">
           <h3 class="text-lg font-semibold mb-2 bg-green-200 rounded">Moving to...</h3>
 
-          <select [(ngModel)]="ticketStatus"
-            name="ticketStatus"
-            class="block w-full appearance-none border border-gray-300 px-3 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-grey-200 focus:border-green-200">
+          <select [(ngModel)]="ticketStatus" name="ticketStatus" class="block w-full appearance-none border border-gray-300 px-3 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-grey-200 focus:border-green-200">
               <option value="" disabled selected>Select status</option>
               <option value="todo"> Todo</option>
               <option value="in-progress"> In Progress</option>
               <option value="done"> Resolved</option>
           </select>
 
-          <button (click)="confirmMoveTicket()"
-                  class="p-2 bg-blue-400 text-white rounded hover:bg-blue-200">
+          <button class="p-2 bg-blue-400 text-white rounded hover:bg-blue-200" (click)="confirmMoveTicket()">
             Confirm
           </button> 
         </div>
@@ -59,16 +50,15 @@
       @if (selectedAssignTicketId === ticket.id){
         <div class="mt-4 p-4 bg-gray-50  border-t-2">
           <h3 class="text-lg font-semibold mb-2 bg-green-200 rounded ">Assigning to...</h3>
-          <select [(ngModel)]="assignedUserId"
-                  name="assignedUserId"
-                  class="block w-full appearance-none border border-gray-300 px-3 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-green-200">
+
+          <select [(ngModel)]="assignedUserId" name="assignedUserId" class="block w-full appearance-none border border-gray-300 px-3 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-green-200">
             <option value="">Choose User to assign...</option>
             <option *ngFor="let user of users" [value]="user.id">
               👤 {{ user.name }}
             </option>
           </select>
 
-          <button (click)="confirmAssign()" class="px-4 py-2 mt-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          <button class="px-4 py-2 mt-2 bg-blue-600 text-white rounded hover:bg-blue-700" (click)="confirmAssign()">
              Assign
           </button>
 
@@ -78,32 +68,31 @@
 
       <!-- falseWindow: Buttons after creation-->
       <ul class="flex flex-row gap-5 justify-center mt-6 pt-4 border-t">
-        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
-            (click)="moveTicket(ticket.id)">
+        
+        <li  class = "flex items-center justify-center gap-2 cursor-pointer hover:opacity-80" (click)="moveTicket(ticket.id)" >
           <span class="text-orange-600">➡️</span> Move
         </li>
 
         
-        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
-            (click)="createAssign(ticket.id)">
+        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80" (click)="createAssign(ticket.id)">
           <span class="text-green-600">👤</span> Assign
         </li>
    
         
-        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80"
-            (click)="deleteAssign(ticket.id)">
+        <li class="flex items-center justify-center gap-2 cursor-pointer hover:opacity-80" (click)="deleteAssign(ticket.id)">
           <span class="text-red-600">X</span> delete
         </li>
 
 
-      <!-- displaying assigned -->
+        <!-- displaying assigned -->
         @if (ticket.assigned_to) {
           <div class="mt-2 px-3 py-1  bg-green-200 rounded">
             <span class="text-xs text-black">
                <span class="font-semibold">{{ getAssignedUserName(ticket.assigned_to) }}</span>
             </span>
           </div>
-        } @else {
+        } 
+        @else {
           <div class="mt-2 px-3 py-1 bg-gray-50 border-gray-300 rounded">
             <span class="text-xs text-gray-400 italic">Unassigned</span>
           </div>

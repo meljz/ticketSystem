@@ -13,5 +13,4 @@ export class HeaderComponent {
   title = signal('Ticketing System');
 
 
-
 }

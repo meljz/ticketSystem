@@ -10,8 +10,6 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './primary-button.component.css'
 })
 export class PrimaryButtonComponent {
-   pangalan: string = '';
-
 
   constructor(
     private router: Router
@@ -25,6 +23,13 @@ export class PrimaryButtonComponent {
     return this.router.url.includes('/login') || this.router.url.includes('/register');
   }
 
+  get pangalan(): string {
+    return localStorage.getItem('pangalan') || '';
+  }
+
+  testing(){
+    console.log('test');
+  }
    
   logout() {
     alert('logout check msg');
@@ -34,9 +39,7 @@ export class PrimaryButtonComponent {
   }
 
   
-  ngOnInit() {
-    this.pangalan = localStorage.getItem('pangalan') || '';
-  }
+
   
   
 

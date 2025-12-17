@@ -1,12 +1,12 @@
 <div class="flex justify-center items-center mt-4 gap-2">
   @if (isLoggedIn && !isAuthPage) {
-    <!-- Show Logout only when logged in and not on login/register -->
-    <a class="bg-orange-400 text-white px-4 py-2 rounded cursor-pointer" (click)="logout()">
+    <a class="bg-orange-400 text-white px-2 py-1 rounded cursor-pointer" (click)="logout()">
             Logout
     </a>
       <a class=" text-white px-4 py-2 rounded cursor-pointer">
             | {{ pangalan }}
     </a>
+    
 
   } @else{
     <!-- Show Login/Register only when not logged in and not on home -->
@@ -17,4 +17,5 @@
       Register
     </a>
   }
+
 </div>
