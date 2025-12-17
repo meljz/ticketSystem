@@ -5,25 +5,26 @@
 
     <!-- Kanban Board -->
     <div class="flex flex-1 flex-col justify-center gap-2 p-6 bg-white ">
-       <div class = "flex flex-1 flex-row justify-center gap-15 p-6 bg-gray-100 rounded">
-        <div class="w-full  bg-gray-200 rounded-lg shadow-md p-4">
+       <div class = "flex flex-1 flex-row justify-center gap-15 p-6 bg-gray-200 rounded">
+        <div class="w-full  bg-white rounded-lg shadow-md p-4">
 
           <div class = "p-4 mb-2">
-              <h2 class="text-xl font-bold ">Welcome Back <span class="text-green-500 text-2xl">{{ pangalan }} 👋!</span></h2>
+              <h2 class="font-bold text-black-600 text-xl ">Welcome Back <span class="text-green-700 text-2xl italic font-medium">{{ pangalan }}</span> !</h2>
           </div>
      
-          <div class= "text-xl font-bold mb-4  w-full h-full  p-3 border-t-2 text-center ">
-            <h1 class = " mb-4 " > Your pending task: </h1>
+          <div class= "text-xl mb-4  w-full  p-3 border-t-2 text-center ">
+            <h1 class = " mb-4 font-medium" > Your pending task: </h1>
 
             <!--im using localStorage for filtering (im filtering by checking if ticket.assiged_to is equals then pangalan_id)-->
             <div class = "flex-1 flex-col space-y-4">
+
               @for (ticket of tickets; track ticket.id){ <!--this is looping every ticket-->
-                <div class = "flex-1 flex-col space-y-4 shadow-sm  bg-gray-100 shadow-md">
+                <div class = "flex-1 flex-col space-y-4   bg-gray-50 shadow-md">
+
                 @if(ticket.assigned_to == pangalan_id){ <!--i set conditional, will only shows if assign and userid is the same -->
+                  
                   <div class = "p-4">
-                    <span class="text-lg"> 
-                      <span class = "text-red-500">Ticket Number:</span> {{ ticket.id}} | <span class = "text-red-500">TITLE: </span>{{ ticket.title}} 
-                    </span>
+                      <span class = "text-red-700 italic font-thin">Ticket Number:</span> {{ ticket.id}} | <span class = "text-red-700 italic font-thin">Title: </span>{{ ticket.title}} 
                   </div>
                 }
 

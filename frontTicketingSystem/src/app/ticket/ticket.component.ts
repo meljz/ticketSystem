@@ -20,7 +20,8 @@ export class TicketComponent implements OnInit {
   showInput = false;
   moveInput = false;
   showAssign = false;
-  
+  editInput = false;
+
   // Form fields
   newTicketTitle = '';
   ticketStatus = '';
@@ -31,6 +32,7 @@ export class TicketComponent implements OnInit {
   // Tracking
   selectedTicketId: number | null = null;
   selectedAssignTicketId: number | null = null;
+  selectedEditTicketId: number | null = null;
   
   constructor(
     private ticketService: TicketService,
@@ -84,23 +86,24 @@ export class TicketComponent implements OnInit {
 
   //-------confirm a ticket, then saves new ticket into backend-------
   confirmMoveTicket() {
-    if (this.selectedTicketId !== null && this.ticketStatus) {
-      this.ticketService.updateTicketStatus(this.selectedTicketId, this.ticketStatus)
-        .subscribe({
-          next: () => {
-            console.log("Ticket moved successfully");
-            this.ticketStatus = '';
-            this.selectedTicketId = null;
-            this.moveInput = false; 
-            this.refreshTickets();
-          },
-          error: (err) => {
-            console.error("Error moving ticket:", err);
-            alert("Failed to move ticket");
-          }
-        });
-    }
+  if (this.selectedTicketId !== null && this.ticketStatus) {
+    this.ticketService.updateTicketStatus(this.selectedTicketId, { status: this.ticketStatus })
+      .subscribe({
+        next: () => {
+          console.log("Ticket moved successfully");
+          this.ticketStatus = '';
+          this.selectedTicketId = null;
+          this.moveInput = false; 
+          this.refreshTickets();
+        },
+        error: (err) => {
+          console.error("Error moving ticket:", err);
+          alert("Failed to move ticket");
+        }
+      });
   }
+}
+
   /* ============================================================================== */
 
   /*====================ALL ASSIGNING LOGICS START================================ */
@@ -183,6 +186,49 @@ export class TicketComponent implements OnInit {
       }
     });
   }
+  /* ============================================================================== */
+
+   /*====================ALL EDIT LOGICS START================================ */
+
+  editAssign(id: number) {
+  this.editInput = true;
+   this.selectedEditTicketId = id; // hide other forms 
+   this.showInput = false;
+    this.moveInput = false;
+     this.showAssign = false; 
+     this.selectedAssignTicketId = null;
+  }
+
+  confirmEdit(id: number, title: string) {
+  this.ticketService.updateTicket(id, { title }).subscribe({
+    next: (response) => {
+      console.log("Ticket updated successfully", response);
+      this.refreshTickets();
+      this.editInput = false;
+      this.selectedEditTicketId = null;
+    },
+    error: (err) => {
+      console.error("Update failed", err);
+      alert("Update failed");
+    }
+  });
+}
+confirmEditStatus(id: number, status: string) {
+  this.ticketService.updateTicket(id, { status }).subscribe({
+    next: (response) => {
+      console.log("Ticket status updated successfully", response);
+      this.refreshTickets();
+      this.moveInput = false;
+      this.selectedTicketId = null;
+    },
+    error: (err) => {
+      console.error("Update failed", err);
+      alert("Update failed");
+    }
+  });
+}
+
+
   /* ============================================================================== */
 
   /** Filtered tickets for this column */

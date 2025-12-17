@@ -7,13 +7,15 @@
     <div class="flex flex-1  flex-col p-6 bg-gray-100 overflow-auto">
       <div class = "flex flex-1 flex-row justify-center gap-10 p-6 bg-gray-200 rounded">
           <div class="w-full  bg-gray-50 rounded-lg shadow-md p-4">
-
-      <h2 class="text-xl font-bold mb-4">Users List</h2>
+      
+      <div class = "border-b p-2 mb-2">
+        <h2 class="text-xl font-bold mb-4">Users List</h2>
+      </div>
 
       <ul class="space-y-2">
-        <li *ngFor="let user of users" class="p-2 bg-gray-100 shadow-md rounded p-5">
-          <span class="text-orange-600 text-bold  text-xl"> Users {{user.id}}: </span>{{ user.name }} 
-          <span class ="text-orange-600  text-xl"> User Email: </span> {{ user.email }}
+        <li *ngFor="let user of users" class="space-y-6 bg-gray-50 shadow-md rounded p-5">
+          <span class="text-red-600 font-thin  text-xl italic"> Users {{user.id}}: </span>{{ user.name }}  |
+          <span class ="text-red-600  font-thin text-xl italic"> Email: </span> {{ user.email }}
         </li>
       </ul>
         </div>

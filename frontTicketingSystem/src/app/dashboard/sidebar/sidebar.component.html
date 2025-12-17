@@ -1,28 +1,42 @@
-<aside class="min-h-screen w-70 h-full shadow-2xl bg-gray-200 text-black flex flex-col border-r py-10">
+<aside class="min-h-screen w-70 h-full shadow-2xl bg-white text-gray-700 flex flex-col border-r">
+
 
   <nav class="p-2 space-y-4  ">
-    <h1 class = "text-3xl text-bold text-center border-b p-5">TicketingSystem</h1>
+    <div class="p-6 border-b">
+      <h1 class="text-xl font-bold text-gray-800">TicketingSystem</h1>
+    </div>
 
-    <a class="block p-2 text-center text-md  text-shadow-xs text-black-200 bg-white rounded-xl hover:bg-gray-50  shadow-lg cursor-pointer " routerLink="/">
-       Dashboard
+
+    <a class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" routerLink="/">
+      <span class="text-lg">🏠 Dashboard</span> 
     </a>
 
-    <a class="block p-2 text-center text-md text-shadow-xs text-black-200 rounded-xl bg-white hover:bg-gray-50  shadow-lg cursor-pointer" routerLink="/kanboard">
-        Kanban Board
+    <a class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" routerLink="/kanboard">
+       <span class="text-lg">📋 kanboard</span>  
     </a>
     
-    <a class="block p-2 text-center text-md text-black-200 rounded-xl bg-white hover:bg-gray-50  shadow-lg cursor-pointer"  routerLink="/listuser">
-      List of Users
+    <a class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" routerLink="/listuser">
+      <span class="text-lg">👥 List Users</span> 
     </a>
   </nav>
 
-  <nav class = "mt-auto fp-2 space-y-6">
+  <nav class = "mt-auto p-2 space-y-6">
+  
+ <div class="p-6 border-t">
+    <div class="flex items-center gap-3 px-4 py-3 mb-2">
+      <div class="w-10 h-10 rounded-full border-2 border-gray-400 bg-white-500 flex items-center justify-center text-white font-medium">
+        👤
+      </div>
+      <div class="flex-1">
+        <div class=" font-bold text-gray-800 text-xl">{{ pangalan }}</div>
 
-     <a class="block px-2 text-2xl text-black-500  w-20">
-        {{ pangalan }}
-    </a>
-        <a class="block p-2 m-3 text-sm text-white  text-center rounded bg-orange-400 hover:bg-orange-600  shadow-lg cursor-pointer" (click)="logout()">
-            Logout
-    </a>
+      </div>
+    </div>
+    <button class="w-full px-4 py-2 text-sm text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-colors cursor-pointer" (click)="logout()">
+      Logout
+    </button>
+  </div>
   </nav>
+  
+  
 </aside>

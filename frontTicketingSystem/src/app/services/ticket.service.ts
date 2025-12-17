@@ -24,16 +24,20 @@ export class TicketService {
   }
 
   
-
   addTicket(title: string, status: string): Observable<any> {
     const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
     return this.http.post(this.apiUrl, { title, status }, { headers });
   }
 
-  updateTicketStatus(id: number, status: string): Observable<any> {
-    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
-    return this.http.put(`${this.apiUrl}/${id}`, { status }, { headers });
-  }
+  updateTicketStatus(id: number, data: any): Observable<any> {
+  const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+  return this.http.put(`${this.apiUrl}/${id}`, data, { headers });
+}
+
+  updateTicket(id: number, data: any): Observable<any> {                            //pinaghiwalay to and updateTicketStatus, ginagamit ni moveticket() yung dalawang response
+  const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };   // na title and status, e sa updateticket need lang is yung title
+  return this.http.put(`${this.apiUrl}/${id}`, data, { headers });
+}
 
   assignTicket(ticketId: number, userId: string): Observable<any> {
     const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
