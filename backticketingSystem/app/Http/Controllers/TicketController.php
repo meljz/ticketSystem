@@ -59,7 +59,7 @@ class TicketController extends Controller
     // deleete ticket
     public function destroy($id){
 
-        $destroyTicket = Ticket::destroy($id);
+        $destroyTicket = Ticket::destroy(ids: $id);
 
         return response()->json(
             [null,

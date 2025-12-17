@@ -170,10 +170,7 @@ export class TicketComponent implements OnInit {
 
   /*====================ALL DELETE LOGICS START================================ */
   deleteAssign(id: number) {
-    if (!confirm('Are you sure you want to delete this ticket?')) {
-      return;
-    }
-
+    
     this.ticketService.deleteTicket(id).subscribe({
       next: (response) => {
         console.log("Success deleting", response);

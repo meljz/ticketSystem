@@ -11,10 +11,13 @@ import { HeaderComponent } from './component/header/header.component';
   imports: [RouterOutlet, HeaderComponent ],
 
   template: `
-    <app-header></app-header>
-      <main class="flex-1 ml-64 p-6 bg-gray-400">
-        <router-outlet></router-outlet>
-      </main>
+    <div class="flex flex-col h-screen">
+  <app-header class="shrink-0"></app-header>
+  <main class="flex-1 overflow-y-auto ml-64 p-6 bg-gray-400">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
   `,
 
   styleUrl: './app.component.css'
