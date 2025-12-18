@@ -5,7 +5,7 @@ import { KanboardComponent } from "../kanboard/kanboard.component";
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { TicketService } from '../../services/ticket.service';
-import { HeaderComponent } from '../../component/header/header.component';
+//import { HeaderComponent } from '../../component/header/header.component';
 
 @Component({
   selector: 'app-home',

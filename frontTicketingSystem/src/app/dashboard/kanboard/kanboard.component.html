@@ -8,35 +8,39 @@
 
       <!--TOP-->
       
-      <div class="flex flex-col gap-2">
-        <div class=" w-full  bg-gray-100 rounded-lg shadow-md p-4 mb-2 space-x-4">
-            <span class=" rounded p-2 text-xl">Team: </span>
-          @for (user of users; track user.id) {
-            <span class = "p-2 text-ms rounded">{{ user.name }}</span>
-          }
+      <div class="gap-2">
+        <div class="flex flex-1 flex-col w-full bg-gray-100 rounded-lg shadow-md p-4 mb-2 gap">
+          <div class = "text-center">            
+            <span class="flex-1 rounded p-2 text-xl">Team: </span>
+          </div>
+          <div class="flex flex-wrap">
+            @for (user of users; track user.id) {
+              <span class = "p-2 text-ms rounded">{{ user.name }}</span>
+            }
+          </div>
         </div>
       </div>
  
        
       <!--BOTTOM-->
       <!-- To Do -->
-       <div class = "flex flex-1 flex-row justify-center gap-15 p-6 bg-gray-200 overflow-x-auto rounded">
-        <div class="w-full  bg-amber-50 rounded-lg shadow-md p-4">
-          <h2 class="text-xl font-bold mb-4 rounded-lg bg-amber-200 w-full p-3 shadow-lg text-center">To Do</h2>
-          <app-ticket [moveStatus]="'todo'"></app-ticket>
-        </div>
+       <div class = "flex flex-1 flex-col xl:flex-row justify-center gap-6 p-5 bg-gray-500 overflow-x-auto rounded">
+          <div class="w-full  min-w-0 bg-amber-50 rounded-lg shadow-md p-4">
+            <h2 class="text-xl font-bold mb-4 rounded-lg bg-amber-200 w-full p-3 shadow-lg text-center">To Do</h2>
+            <app-ticket [moveStatus]="'todo'"></app-ticket>
+          </div>
 
-        <!-- In Progress -->
-        <div class="w-full bg-orange-50 rounded-lg shadow-md p-4">
-          <h2 class="text-xl font-bold mb-4  rounded-lg bg-orange-200 w-full p-3 shadow-lg text-center">In Progress</h2>
-          <app-ticket [moveStatus]="'in-progress'"></app-ticket>
-        </div>
+          <!-- In Progress -->
+          <div class="w-full min-w-0 bg-orange-50 rounded-lg shadow-md p-4">
+            <h2 class="text-xl font-bold mb-4  rounded-lg bg-orange-200 w-full p-3 shadow-lg text-center">In Progress</h2>
+            <app-ticket [moveStatus]="'in-progress'"></app-ticket>
+          </div>
 
-        <!-- Done -->
-        <div class="w-full  bg-green-50 rounded-lg shadow-md p-4">
-          <h2 class="text-xl font-bold mb-4  rounded-lg bg-green-200 w-full p-3 shadow-lg text-center">Resolved</h2>
-          <app-ticket [moveStatus]="'done'"></app-ticket>
-        </div>
+          <!-- Done -->
+          <div class="w-full min-w-0 bg-green-50 rounded-lg shadow-md p-4">
+            <h2 class="text-xl font-bold mb-4  rounded-lg bg-green-200 w-full p-3 shadow-lg text-center">Resolved</h2>
+            <app-ticket [moveStatus]="'done'"></app-ticket>
+          </div>
         </div>
       </div>
   </section>
