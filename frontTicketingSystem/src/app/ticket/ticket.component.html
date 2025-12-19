@@ -12,6 +12,8 @@
       </form>
     }
 
+  
+
     <!-- create ticket Buttons -->
     <ul class="flex flex-row gap-5 justify-center my-2">
       <li class="flex items-center justify-center gap-2 cursor-pointer" (click)="createTicket()">
@@ -29,6 +31,28 @@
         <div class = "text-bold text-lg">
           {{ ticket.id }} | {{ ticket.title }}
         </div>
+
+        <!--edit-->
+        @if (editInput && selectedEditTicketId === ticket.id) {
+          <div class="mt-4 p-4 bg-gray-50 border-t-2 rounded-lg">
+            <h3 class="text-lg font-semibold mb-2 bg-green-200 rounded">Editing Ticket</h3>
+            
+            <textarea 
+              [(ngModel)]="editTicketTitle" 
+              name="editTicketTitle" 
+              placeholder="Enter new ticket title" 
+              class="border p-2 rounded w-full h-24 mb-2"
+            ></textarea>
+            
+            <button 
+              class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" 
+              (click)="confirmEdit(ticket.id, editTicketTitle)"
+            >
+              Save Changes
+            </button>
+            
+          </div>
+        }
 
         <!-- falseWindow: Move Ticket Options -->
         @if (moveInput && selectedTicketId === ticket.id) {
@@ -79,6 +103,11 @@
         <li class="flex-1 items-center justify-center gap-2 cursor-pointer hover:opacity-80" (click)="createAssign(ticket.id)">
           <span class="text-green-600">👤</span>
           <span class = "hidden 2xl:inline text-lg">Assign</span> 
+        </li>
+
+        <li class="flex-1 items-center justify-center gap-2 cursor-pointer hover:opacity-80" (click)="editAssign(ticket.id)">
+          <span class="text-green-600"></span>
+          <span class = "hidden 2xl:inline text-lg">Edit</span> 
         </li>
    
         

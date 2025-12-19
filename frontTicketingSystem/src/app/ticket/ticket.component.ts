@@ -26,6 +26,7 @@ export class TicketComponent implements OnInit {
   newTicketTitle = '';
   ticketStatus = '';
   assignedUserId: string = ''; 
+   editTicketTitle = '';
   
   tickets: any[] = []; // holds all tickets
 
@@ -213,6 +214,7 @@ export class TicketComponent implements OnInit {
     }
   });
 }
+
 confirmEditStatus(id: number, status: string) {
   this.ticketService.updateTicket(id, { status }).subscribe({
     next: (response) => {
