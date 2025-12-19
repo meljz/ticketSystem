@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -16,10 +17,19 @@ export class RegisterComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private snackBar: MatSnackBar) {}
 
   //this receive the json in the backend that was sent
   register() {
+  this.snackBar.open ('Register success, please login', 'close', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['bg-red-500']
+      });
+  
   this.authService.register({ name: this.name, email: this.email, password: this.password })
     .subscribe({
       next: res => {
@@ -31,8 +41,6 @@ export class RegisterComponent {
       },
       error: err => console.error('Error:', err)
     });
-
-    alert('register success');
 }
 
 }

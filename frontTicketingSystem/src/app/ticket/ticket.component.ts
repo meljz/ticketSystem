@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { TicketService } from '../services/ticket.service';
 import { AuthService } from '../services/auth.service'; 
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ticket',
   standalone: true,
-  imports: [FormsModule, CommonModule], 
+  imports: [FormsModule, CommonModule, MatSnackBarModule], 
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.css'
 })
@@ -37,7 +38,8 @@ export class TicketComponent implements OnInit {
   
   constructor(
     private ticketService: TicketService,
-    private authService: AuthService 
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -52,10 +54,20 @@ export class TicketComponent implements OnInit {
     this.moveInput = false;
     this.selectedTicketId = null;
     this.selectedAssignTicketId = null;
+  
   }
 
   //-------Save a new ticket, then sends to backend-------
   submitNewTicket() {
+    
+    //snackbar
+    this.snackBar.open ('submitting success', 'close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['bg-green-500']
+      });
+
     if (this.newTicketTitle.trim()) {
       this.ticketService.addTicket(this.newTicketTitle, this.moveStatus)
         .subscribe({
@@ -87,6 +99,14 @@ export class TicketComponent implements OnInit {
 
   //-------confirm a ticket, then saves new ticket into backend-------
   confirmMoveTicket() {
+  //snackbar
+  this.snackBar.open ('move success', 'close', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['snack-bar']
+      });
+
   if (this.selectedTicketId !== null && this.ticketStatus) {
     this.ticketService.updateTicketStatus(this.selectedTicketId, { status: this.ticketStatus })
       .subscribe({
@@ -117,6 +137,14 @@ export class TicketComponent implements OnInit {
   }
 
   confirmAssign() {
+    //snackbar
+    this.snackBar.open ('assigning success', 'close', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['bg-red-500']
+      });
+
     if (!this.assignedUserId) {
       alert('Please select a user to assign');
       return;
@@ -175,6 +203,14 @@ export class TicketComponent implements OnInit {
 
   /*====================ALL DELETE LOGICS START================================ */
   deleteAssign(id: number) {
+
+    this.snackBar.open ('delete success', 'close', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['bg-red-500']
+      });
+
     
     this.ticketService.deleteTicket(id).subscribe({
       next: (response) => {
@@ -201,6 +237,14 @@ export class TicketComponent implements OnInit {
   }
 
   confirmEdit(id: number, title: string) {
+    //snackbar
+    this.snackBar.open ('edit success', 'close', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['bg-red-500']
+      });
+
   this.ticketService.updateTicket(id, { title }).subscribe({
     next: (response) => {
       console.log("Ticket updated successfully", response);
