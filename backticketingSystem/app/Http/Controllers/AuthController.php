@@ -8,6 +8,7 @@ use Illuminate\Http\Request;         // Handles incoming requests
 use Illuminate\Support\Facades\Hash; // For password hashing
 use Illuminate\Support\Str;          // For token generation
 
+
 class AuthController extends Controller
 { 
     public function index(Request $request) {
@@ -49,29 +50,37 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->input('email'))->first();
 
-        if ($user && Hash::check($request->input('password'), $user->password)) {
+        try {
+            if ($user && Hash::check($request->input('password'), $user->password)) {
 
-            // Generate random token
-            $token = Str::random(60);
-            $user->api_token = $token;
-            $user->save();
+                // Generate random token
+                $token = Str::random(60);
+                $user->api_token = $token;
+                $user->save();
 
-            // sends json back with the user and token
-            return response()->json([
-                'message' => 'login successful',
-                'user' => [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email
-                ],
-                'token' => $token
-            ], 200);
+                // sends json back with the user and token
+                return response()->json([
+                    'message' => 'login successful',
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email
+                    ],
+                    'token' => $token
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'Invalid Credentials'
+                ], 401);
             }
-
+        }
+        catch (\Exception $e) {
             return response()->json([
-                'message' => 'invalid credentials'
-            ], 401);
-}
+                'message' => 'An error occurred during login',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+   }
 
 
     public function logout(Request $request) {
