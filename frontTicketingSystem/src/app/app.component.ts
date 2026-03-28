@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet ],
+  imports: [RouterOutlet],
 
   template: `
     <div class="flex flex-col h-screen">

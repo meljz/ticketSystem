@@ -26,12 +26,6 @@ export class LoginComponent {
   //this receives the backend login json 
   login() {
     //snackbar
-      this.snackBar.open ('Login success! Redirecting to Dashboard', 'close', {
-        duration: 4000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['bg-red-500']
-      });
 
     this.authService.login({ email: this.email, password: this.password })
       .subscribe({
@@ -40,12 +34,27 @@ export class LoginComponent {
           localStorage.setItem('token', res.token); //saves token 
           localStorage.setItem('pangalan_id', res.user.id.toString()); // saves the names id rather then name. (this is not triggering yet)
           localStorage.setItem('pangalan', res.user.name);//saves name
+          
+          this.snackBar.open ('Login success! Redirecting to Dashboard', 'close', {
+            duration: 4000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['bg-red-500']
+          });
 
           //alert('redirecting sa home '); 
           setTimeout(() => this.router.navigate(['/']), 500);
           },
 
-        error: err => console.error('Login failed:', err)
+        error: err => {
+          console.error('Login failed:', err)
+          this.snackBar.open(err.error.message || 'Login failed', 'close', {
+            duration: 4000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['bg-red-500']
+          });
+        }
       });  
 
   }
