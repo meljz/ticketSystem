@@ -25,6 +25,10 @@ $app = new Laravel\Lumen\Application(
 $app->withFacades();
 $app->withEloquent();
 
+//added for error debugging purposes only.
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 /*
 |--------------------------------------------------------------------------
 | Register Configuration
