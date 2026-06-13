@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/auth'; // Lumen backend URL
-  users: any [] =[]; //i can use this in all components
+  //private apiUrl = 'http://localhost:8000/auth'; // Lumen backend URL
+ 
+
+  private apiUrl = `${environment.apiUrl}/auth`; //prod url
+
+   users: any [] =[]; //i can use this in all components
 
   constructor(private http: HttpClient) {}
 

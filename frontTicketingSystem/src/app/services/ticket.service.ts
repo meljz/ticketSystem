@@ -3,10 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environments';
+
 @Injectable({ providedIn: 'root' })
 export class TicketService {
-  private apiUrl = 'http://localhost:8000/api/tickets';
+  // private apiUrl = 'http://localhost:8000/api/tickets'; --> localUrl
 
+  //prod
+  private apiUrl = `${environment.apiUrl}/auth`;
+  
   constructor(private http: HttpClient) {}
 
   //this is all getting all tickets 
