@@ -1,6 +1,6 @@
 FROM php:8.3-cli
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -8,9 +8,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpng-dev \
     libonig-dev \
-    libxml2-dev
+    libxml2-dev \
+    libpq-dev
 
-# Install PHP extensions needed by Lumen -> NEWLY ADDED ALWAYS CHECK WHAT DB
+# Install PHP extensions needed by Lumen (PostgreSQL FIX)
 RUN docker-php-ext-install pdo pdo_pgsql mbstring
 
 # Install Composer
