@@ -33,4 +33,4 @@ RUN chmod -R 775 storage bootstrap/cache || true
 EXPOSE 10000
 
 # Start Lumen using PHP built-in server -> NEWLY ADDED
-CMD php artisas migrate --force && php -S 0.0.0.0:10000 -t public 
+CMD php artisan migrate --force && php -S 0.0.0.0:10000 -t public 
