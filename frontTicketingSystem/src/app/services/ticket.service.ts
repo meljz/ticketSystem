@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from '../../environments/environments';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TicketService {
@@ -11,7 +11,7 @@ export class TicketService {
 
   //prod
   private apiUrl = `${environment.apiUrl}/auth`;
-  
+
   constructor(private http: HttpClient) {}
 
   //this is all getting all tickets 
