@@ -10,7 +10,7 @@ export class TicketService {
   // private apiUrl = 'http://localhost:8000/api/tickets'; --> localUrl
 
   //prod
-  private apiUrl = `${environment.apiUrl}/auth`;
+  private apiUrl = `${environment.apiUrl}/api/tickets`;
 
   constructor(private http: HttpClient) {}
 
